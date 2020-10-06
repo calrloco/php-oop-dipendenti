@@ -23,13 +23,12 @@ class Impiegato extends Dipendente
         $mansione,
         $livelloRetributivo
     ) {
-        if($level == 'senior' || $level == 'junior'){
+        if ($level == 'senior' || $level == 'junior') {
             $this->level = $level;
-           
-        }else{
-            die("inserisci un livello tra juonior e senior");
+        } else {
+            throw new Exception("inserisci un livello tra juonior e senior");
         }
-      
+
         $this->mansione = $mansione;
         $this->livelloRetributivo = $livelloRetributivo;
 
@@ -44,30 +43,43 @@ class Impiegato extends Dipendente
         );
     }
     //////triat calcolotredicesima////////////////////////////////
-    function calcoloTredicesima($mesi){
-        return $this->calcola($this->stipendioMensile,$mesi);
-   }
+    function calcoloTredicesima($mesi)
+    {
+        return $this->calcola($this->stipendioMensile, $mesi);
+    }
     //////getters////////////////////////////////
-    public function getLevel() {
+    public function getLevel()
+    {
         return $this->level;
     }
-    public function getMansione(){
+    public function getMansione()
+    {
         return $this->mansione;
     }
-    public function getLivelloRetributivo(){
+    public function getLivelloRetributivo()
+    {
         return $this->livelloRetributivo;
     }
     /////setters///////////////////////////////
-    public function setLevel($level){
-        if($level != 'junior' || $level != 'senior'){
-            die("inserisci un livello tra juonior e senior");
+    public function setLevel($level)
+    {
+        if ($level == 'junior' || $level == 'senior') {
+
+            $this->level = $level;
+        } else {
+            throw new Exception("inserisci un livello tra juonior e senior");
         }
-        $this->level = $level;
     }
-    public function setMansione($mansione){
+    public function setMansione($mansione)
+    {
         $this->mansione = $mansione;
     }
-    public function setLivelloRetributivo($livelloRetributivo){
+    public function setLivelloRetributivo($livelloRetributivo)
+    {
         $this->livelloRetributivo = $livelloRetributivo;
+    }
+    
+    public function __toString(){
+        return parent::__toString().' '. 'livello: '.$this->level.' mansione: '.$this->mansione.' livello retributivo'.$this->livelloRetributivo.'<br>'.'<br>';
     }
 }

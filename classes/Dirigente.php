@@ -23,7 +23,7 @@ class Dirigente extends Dipendente
         $autista
     ) {
         if ($fascia > 2 || $fascia < 1) {
-            die("Fascia deve essere un numero fra 1 e 2");
+            throw new Exception("Fascia deve essere un numero fra 1 e 2");
         }
         $this->fascia = $fascia;
         if (
@@ -32,11 +32,10 @@ class Dirigente extends Dipendente
         ) {
             $this->cartaAziedale = $cartaAziedale;
             $this->autista = $autista;
-            
-        }else{
-            die("Inserisci valore Booleano");
+        } else {
+            throw new Exception('Inserisci valore Booleano');
         }
-    
+
 
         parent::__construct(
             $nome,
@@ -49,8 +48,9 @@ class Dirigente extends Dipendente
         );
     }
     //////funzione overraid trait///////////////
-    function calcoloTredicesima($mesi){
-         return $this->calcola($this->stipendioMensile,$mesi);
+    function calcoloTredicesima($mesi)
+    {
+        return $this->calcola($this->stipendioMensile, $mesi);
     }
     //////getter////////////////////////////////
     public function getFascia()
@@ -69,22 +69,25 @@ class Dirigente extends Dipendente
     public function setFascia($fascia)
     {
         if ($fascia > 2 || $fascia < 1) {
-            die("Fascia deve essere un numero fra 1 e 2");
+            throw new Exception("Fascia deve essere un numero fra 1 e 2");
         }
         $this->fascia = $fascia;
     }
     public function setCartaAziendale($cartaAziedale)
     {
-        if ($cartaAziedale != true || $cartaAziedale = !false) {
-            die("Inserire valore booleano");
+        if ($cartaAziedale != true || $cartaAziedale != false) {
+            throw new Exception("Inserire valore booleano");
         }
         $this->$cartaAziedale = $cartaAziedale;
     }
     public function setAutista($autista)
     {
         if ($autista != true || $autista = !false) {
-            die("Inserire valore booleano");
+            throw new Exception("Inserire valore booleano");
         }
         $this->autista = $autista;
+    }
+    public function __toString(){
+        return parent::__toString().' '. 'fascia: '.$this->fascia.' carta: '.$this->cartaAziedale.' autista: '.$this->autista.'<br>'.'<br>';
     }
 }
